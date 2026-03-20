@@ -1,4 +1,4 @@
-# Multiplayer Tic-Tac-Toe (Sockets)
+# Multiplayer Tre i rad (Sockets)
 
 ## Teknik
 - Python
@@ -10,5 +10,3 @@
 - Spelare turas om
 - Ange position 0–8
 - Först med tre i rad vinner
-
-### Starta server:
