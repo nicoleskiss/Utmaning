@@ -13,3 +13,12 @@ def print_board(board):
 ---+---+---
  {cells[6]} | {cells[7]} | {cells[8]}
 """)
+    
+def main():
+    client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    client.connect((HOST, PORT))
+
+    symbol = ""
+
+    while True:
+        data = client.recv(1024).decode().strip()

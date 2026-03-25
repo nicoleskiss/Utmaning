@@ -11,3 +11,10 @@ clients = [] # Lista för anslutna
 def handle_game(player1, player2):
     game = TicTacToe()
     players = [(player1, "X"), (player2, "O")]
+
+    for conn, symbol in players:
+        conn.sendall(f"START {symbol}\n".encode())
+
+    current = 0
+
+    
