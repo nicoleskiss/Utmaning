@@ -22,3 +22,29 @@ def main():
 
     while True:
         data = client.recv(1024).decode().strip()
+
+        if data.startswith("START"):
+            symbol = data.split()[1]
+            print(f"Du är spelare {symbol}")
+
+        elif data == "YOUR_TURN":
+            move = input("Din tur (0-8): ")
+            client.sendall(move.encode())
+
+        elif data.startswith("BOARD"):
+            _, board = data.split(" ", 1)
+            print_board(board)
+
+        elif data.startswith("WIN"):
+            winner = data.split()[1]
+            print(f"Spelare {winner} vann!")
+            break
+
+        elif data == "DRAW":
+            print("Oavgjort!")
+            break
+
+        elif data == "INVALID":
+            print("Ogiltigt drag, försök igen!")
+
+    client.close()

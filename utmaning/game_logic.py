@@ -23,4 +23,8 @@ class TicTacToe:
                 return self.board[a]
         return None
     
-    
+    def is_draw(self):
+        return " " not in self.board
+
+    def get_board_string(self):
+        return "|".join(self.board)

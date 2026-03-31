@@ -17,4 +17,16 @@ def handle_game(player1, player2):
 
     current = 0
 
-    
+    while True:
+        conn, symbol = players[current]
+        conn.sendall("YOUR_TURN\n".encode())
+
+        try:
+            data = conn.recv(1024).decode().strip()
+            pos = int(data)
+        except:
+            break
+
+        if not game.make_move(pos):
+            conn.sendall("INVALID\n".encode())
+            continue
