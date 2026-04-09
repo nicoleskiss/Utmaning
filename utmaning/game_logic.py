@@ -28,3 +28,5 @@ class TicTacToe:
 
     def get_board_string(self):
         return "|".join(self.board)
+    
+    

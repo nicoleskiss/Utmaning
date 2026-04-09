@@ -48,3 +48,6 @@ def main():
             print("Ogiltigt drag, försök igen!")
 
     client.close()
+
+if __name__ == "__main__":
+    main()
