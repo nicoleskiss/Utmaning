@@ -2,11 +2,10 @@ import socket
 import threading
 from game_logic import TicTacToe
 
-# Serverns IP och port
-HOST = '0.0.0.0' 
+HOST = '0.0.0.0'
 PORT = 65432
 
-clients = [] # Lista för anslutna 
+clients = []
 
 def handle_game(player1, player2):
     game = TicTacToe()
@@ -45,3 +44,29 @@ def handle_game(player1, player2):
             for c, _ in players:
                 c.sendall("DRAW\n".encode())
             break
+
+        game.switch_player()
+        current = 1 - current
+
+    player1.close()
+    player2.close()
+
+def accept_clients():
+    server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    server.bind((HOST, PORT))
+    server.listen()
+
+    print("Server started... Waiting for players...")
+
+    while True:
+        conn, addr = server.accept()
+        print(f"Player connected: {addr}")
+        clients.append(conn)
+
+        if len(clients) >= 2:
+            p1 = clients.pop(0)
+            p2 = clients.pop(0)
+            threading.Thread(target=handle_game, args=(p1, p2)).start()
+
+if __name__ == "__main__":
+    accept_clients()
